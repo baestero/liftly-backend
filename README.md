@@ -1,4 +1,4 @@
-# Liftly 🚀
+# Liftly
 
 Uma API REST em desenvolvimento.
 
@@ -40,18 +40,21 @@ liftly/
 ### Instalação
 
 1. Clone o repositório:
+
 ```bash
 git clone <url-do-repositorio>
 cd liftly
 ```
 
 2. Instale as dependências:
+
 ```bash
 npm install
 ```
 
 3. Configure as variáveis de ambiente:
-Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
+   Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
+
 ```env
 PORT=3000
 MONGO_URI=mongodb://localhost:27017/liftly
@@ -59,6 +62,7 @@ JWT_SECRET=sua_chave_secreta_aqui
 ```
 
 4. Execute a aplicação:
+
 ```bash
 npm start
 ```
@@ -70,9 +74,11 @@ A aplicação estará rodando em `http://localhost:3000`
 ### Usuários
 
 #### POST `/user/register`
+
 Registra um novo usuário no sistema.
 
 **Body:**
+
 ```json
 {
   "username": "usuario123",
@@ -82,6 +88,7 @@ Registra um novo usuário no sistema.
 ```
 
 **Resposta de Sucesso (201):**
+
 ```json
 {
   "message": ["Usuario criado com sucesso"],
@@ -94,6 +101,7 @@ Registra um novo usuário no sistema.
 ```
 
 **Validações:**
+
 - Todos os campos são obrigatórios
 - Senha deve ter no mínimo 4 caracteres
 - Username deve ter 3-20 caracteres (letras, números e underline)
@@ -110,6 +118,7 @@ Registra um novo usuário no sistema.
 ## 📊 Modelo de Dados
 
 ### User Schema
+
 ```javascript
 {
   username: String (único, 3-20 caracteres, lowercase)
@@ -121,17 +130,7 @@ Registra um novo usuário no sistema.
 ## 🔧 Scripts Disponíveis
 
 - `npm start` - Inicia a aplicação
-- `npm test` - Executa os testes (não implementado ainda)
-
-## 🚧 Funcionalidades Futuras
-
-- [ ] Login de usuários
-- [ ] Middleware de autenticação
-- [ ] Recuperação de senha
-- [ ] Perfil de usuário
-- [ ] Upload de arquivos
-- [ ] Testes automatizados
-- [ ] Documentação com Swagger
+- `npm test` - Executa os testes (não implementado ainda
 
 ## 👨‍💻 Autor
 
