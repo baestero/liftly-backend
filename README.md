@@ -108,6 +108,42 @@ Registra um novo usuário no sistema.
 - Email deve ter formato válido
 - Username e email devem ser únicos
 
+#### POST `/user/auth`
+
+Realiza o login do usuário no sistema.
+
+**Body:**
+
+```json
+{
+  "username": "usuario123",
+  "password": "senha123"
+}
+```
+
+**Resposta de Sucesso (200):**
+
+```json
+{
+  "message": ["Login bem-sucedido"],
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+**Resposta de Erro (401):**
+
+```json
+{
+  "message": ["Usuário ou senha incorretos"]
+}
+```
+
+**Validações:**
+
+- Username e password são obrigatórios
+- Username deve existir no sistema
+- Password deve corresponder ao hash armazenado
+
 ## 🔐 Segurança
 
 - **Hash de Senhas**: Utiliza bcrypt com salt rounds de 10
