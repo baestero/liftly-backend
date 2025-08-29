@@ -2,12 +2,9 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-import { register } from "./controllers/UserController.js";
+import userRoutes from "./routes/user.js";
 
 dotenv.config();
-
-const PORT = process.env.PORT || 3000;
-const MONGO_URI = process.env.MONGO_URI;
 
 const app = express();
 
@@ -17,7 +14,7 @@ app.use(cors());
 
 const connectMongo = async () => {
   try {
-    await mongoose.connect(MONGO_URI);
+    await mongoose.connect(process.env.MONGO_URI);
     console.log("Conectado ao mongo com sucesso!");
   } catch (err) {
     console.log(`Erro ao se conectar ao mongo ${err}`);
@@ -29,6 +26,8 @@ connectMongo();
 
 app.get("/", (req, res) => res.json({ message: "Bem vindo ao meu App" }));
 
-app.use("/user", register);
+app.use("/user", userRoutes);
 
-app.listen(PORT, () => console.log(`Servidor Rodando na Porta ${PORT}`));
+app.listen(process.env.PORT || 3000, () =>
+  console.log(`Servidor Rodando na Porta ${process.env.PORT || 3000}`)
+);
