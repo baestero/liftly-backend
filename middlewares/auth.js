@@ -14,6 +14,8 @@ export const authToken = (req, res, next) => {
     req.user = deccoded;
     next();
   } catch (err) {
-    res.status(403).json({ message: ["Token inválido"] });
+    res
+      .status(403)
+      .json({ message: ["Sessão expirada, Faça o Login novamente"] });
   }
 };

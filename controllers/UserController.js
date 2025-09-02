@@ -106,3 +106,7 @@ export const getMe = async (req, res) => {
     res.status(500).json({ message: ["Erro interno"] });
   }
 };
+
+export const validateToken = async (req, res) => {
+  res.json({ valid: true, user: req.user });
+};
