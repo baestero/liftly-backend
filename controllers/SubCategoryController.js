@@ -2,10 +2,14 @@ import SubCategory from "../models/SubCategory.js";
 
 export const createSubCategory = async (req, res) => {
   const { name } = req.body;
-  const categoryId = req.params.id;
+  const { categoryId } = req.params;
 
   if (!name) {
     res.status(400).json({ message: ["O nome da subcategoria é obrigório!"] });
+  }
+
+  if (!mongoose.Types.ObjectId.isValid(categoryId)) {
+    return req.status(400).json({ message: ["ID da categoria inválido!"] });
   }
 
   try {
@@ -29,12 +33,13 @@ export const createSubCategory = async (req, res) => {
 };
 
 export const listSubCategory = async (req, res) => {
+  const { categoryId } = req.params;
   try {
     const subcategories = await SubCategory.find({
-      categoryId: req.params.id,
+      categoryId,
     });
     return res.status(200).json(subcategories);
   } catch (err) {
-    return res.status(500).json({ err: err.message });
+    return res.status(500).json({ err: [err.message] });
   }
 };

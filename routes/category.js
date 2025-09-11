@@ -6,12 +6,41 @@ import {
   createSubCategory,
 } from "../controllers/SubCategoryController.js";
 
+import {
+  createExercise,
+  deleteExercise,
+  listExercise,
+  updateExercise,
+} from "../controllers/ExcerciseController.js";
+
 const router = express.Router();
 
 router.get("/", authToken, listCategory);
 
-router.get("/:id/subcategories", listSubCategory);
+router.get("/:categoryId/subcategories", authToken, listSubCategory);
 
-router.post("/:id/subcategories", createSubCategory);
+router.get(
+  "/:categoryId/subcategories/:subCategoryId/exercises",
+  authToken,
+  listExercise
+);
+
+router.post(
+  "/:categoryId/subcategories/:subCategoryId/exercises",
+  authToken,
+  createExercise
+);
+
+router.put(
+  "/:categoryId/subcategories/:subCategoryId/exercises/:exerciseId",
+  authToken,
+  updateExercise
+);
+
+router.delete(
+  "/:categoryId/subcategories/:subCategoryId/exercises/:exerciseId",
+  authToken,
+  deleteExercise
+);
 
 export default router;
