@@ -9,7 +9,7 @@ import { authToken } from "../middlewares/auth.js";
 
 const router = express.Router();
 
-router.post("/register", register);
+router.post("/", register);
 
 router.post("/auth", login);
 

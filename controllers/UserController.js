@@ -17,7 +17,7 @@ export const register = async (req, res) => {
   if (password.length < 4) {
     return res
       .status(400)
-      .json({ message: ["A senha precisa de no mínimo 4 caracteres! "] });
+      .json({ message: ["A senha precisa de no mínimo 4 caracteres!"] });
   }
 
   try {
@@ -40,7 +40,7 @@ export const register = async (req, res) => {
   } catch (err) {
     if (err.name === "ValidationError") {
       const errors = Object.values(err.errors).map((e) => e.message);
-      return res.status(400).json({ message: errors });
+      return res.status(400).json({ message: [errors] });
     }
 
     if (err.code === 11000) {
