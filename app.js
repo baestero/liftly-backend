@@ -30,6 +30,6 @@ app.get("/", (req, res) => res.json({ message: "Bem vindo ao meu App" }));
 app.use("/users", userRoutes);
 app.use("/categories", categoryRoutes);
 
-app.listen(process.env.PORT || 3000, () =>
+app.listen(process.env.PORT || 3000, "0.0.0.0", () =>
   console.log(`Servidor Rodando na Porta ${process.env.PORT || 3000}`)
 );
