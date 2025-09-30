@@ -5,7 +5,6 @@ const ExerciseSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "O nome da exercicio é obrigatório"],
-    unique: true,
     lowercase: true,
     match: [
       /^[a-zA-ZÀ-ÿ0-9_\s]{3,20}$/,
@@ -31,5 +30,7 @@ const ExerciseSchema = new mongoose.Schema({
     required: true,
   },
 });
+
+ExerciseSchema.index({ name: 1, userId: 1 }, { unique: true });
 
 export default mongoose.model("exercises", ExerciseSchema);
