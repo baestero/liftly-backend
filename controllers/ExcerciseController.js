@@ -11,7 +11,7 @@ export const createExercise = async (req, res) => {
   }
 
   if (!mongoose.Types.ObjectId.isValid(userId)) {
-    res.status(400).json({ message: ["ID de usuário inválido"] });
+    return res.status(400).json({ message: ["ID de usuário inválido"] });
   }
 
   if (!mongoose.Types.ObjectId.isValid(subCategoryId)) {
@@ -57,8 +57,28 @@ export const listExercise = async (req, res) => {
   }
 };
 
+export const getExerciseById = async (req, res) => {
+  const { subCategoryId, exerciseId } = req.params;
+  const { id: userId } = req.user;
+
+  if (!mongoose.Types.ObjectId.isValid(exerciseId)) {
+    return res.status(400).json({ message: ["ID do exercício inválido!"] });
+  }
+
+  try {
+    const exercise = await Exercise.findOne({
+      subCategoryId,
+      userId,
+      _id: exerciseId,
+    });
+    res.status(200).json(exercise);
+  } catch (err) {
+    return res.status(500).json({ err: [err.message] });
+  }
+};
+
 export const updateExercise = async (req, res) => {
-  const { exerciseId } = req.params;
+  const { subCategoryId, exerciseId } = req.params;
   const { id: userId } = req.user;
 
   if (!mongoose.Types.ObjectId.isValid(exerciseId)) {
@@ -67,13 +87,13 @@ export const updateExercise = async (req, res) => {
 
   try {
     const exercise = await Exercise.findOneAndUpdate(
-      { _id: exerciseId, userId },
+      { _id: exerciseId, userId, subCategoryId },
       req.body,
       { new: true, runValidators: true }
     );
 
     if (!exercise) {
-      return res.status(404).json({ message: ["Excercício não encontrado!"] });
+      return res.status(404).json({ message: ["Exercício não encontrado!"] });
     }
 
     res

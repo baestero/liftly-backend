@@ -1,15 +1,13 @@
 import express from "express";
 import { authToken } from "../middlewares/auth.js";
 import { listCategory } from "../controllers/CategoryController.js";
-import {
-  listSubCategory,
-  createSubCategory,
-} from "../controllers/SubCategoryController.js";
+import { listSubCategory } from "../controllers/SubCategoryController.js";
 
 import {
   createExercise,
   deleteExercise,
   listExercise,
+  getExerciseById,
   updateExercise,
 } from "../controllers/ExcerciseController.js";
 
@@ -23,6 +21,12 @@ router.get(
   "/:categoryId/subcategories/:subCategoryId/exercises",
   authToken,
   listExercise
+);
+
+router.get(
+  "/:categoryId/subcategories/:subCategoryId/exercises/:exerciseId",
+  authToken,
+  getExerciseById
 );
 
 router.post(
