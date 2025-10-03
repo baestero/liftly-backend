@@ -9,16 +9,19 @@ dotenv.config();
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
 
 const connectMongo = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log("Conectado ao mongo com sucesso!");
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("Conectado ao MongoDB Atlas com sucesso!");
   } catch (err) {
-    console.log(`Erro ao se conectar ao mongo ${err}`);
+    console.log(`Erro ao se conectar ao Mongo ${err}`);
     process.exit(1);
   }
 };
