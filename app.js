@@ -15,10 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const connectMongo = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(process.env.MONGO_URI);
     console.log("Conectado ao MongoDB Atlas com sucesso!");
   } catch (err) {
     console.log(`Erro ao se conectar ao Mongo ${err}`);
