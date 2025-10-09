@@ -37,7 +37,7 @@ export const listSubCategory = async (req, res) => {
   try {
     const subcategories = await SubCategory.find({
       categoryId,
-    });
+    }).sort({ _id: 1 });
     return res.status(200).json(subcategories);
   } catch (err) {
     return res.status(500).json({ err: [err.message] });

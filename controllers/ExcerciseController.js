@@ -27,9 +27,11 @@ export const createExercise = async (req, res) => {
       subCategoryId,
       userId,
     });
-    res
-      .status(201)
-      .json({ message: ["Exercício criado com sucesso!"], newExercise });
+
+    return res.status(201).json({
+      message: ["Exercicio adicionado com sucesso!"],
+      newExercise,
+    });
   } catch (err) {
     if (err.name === "ValidationError") {
       const errors = Object.values(err.errors).map((e) => e.message);
@@ -50,7 +52,9 @@ export const listExercise = async (req, res) => {
   const { id: userId } = req.user;
 
   try {
-    const exercises = await Exercise.find({ subCategoryId, userId });
+    const exercises = await Exercise.find({ subCategoryId, userId }).sort({
+      _id: 1,
+    });
     res.status(200).json(exercises);
   } catch (err) {
     return res.status(500).json({ err: [err.message] });

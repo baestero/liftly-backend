@@ -29,7 +29,7 @@ export const createCategory = async (req, res) => {
 
 export const listCategory = async (req, res) => {
   try {
-    const categories = await Category.find();
+    const categories = await Category.find().sort({ _id: 1 });
     return res.status(200).json(categories);
   } catch (err) {
     return res.status(500).json({ err: err.message });
