@@ -7,7 +7,7 @@ const ExerciseSchema = new mongoose.Schema({
     required: [true, "O nome da exercicio é obrigatório"],
     lowercase: true,
     match: [
-      /^[a-zA-ZÀ-ÿ0-9_\s]{3,20}$/,
+      /^[a-zA-ZÀ-ÿ0-9_\s]{3,30}$/,
       "O nome da subcategoria só pode conter letras (com acentos), números e underline, com 3 a 20 caracteres.",
     ],
   },
